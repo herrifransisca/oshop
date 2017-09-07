@@ -123,8 +123,8 @@
     "component-selector": [
       true,
       "element",
-      "",
-      "kebab-case"
+      ""
+      // "kebab-case"
     ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,

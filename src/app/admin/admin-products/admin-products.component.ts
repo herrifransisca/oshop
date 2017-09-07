@@ -11,7 +11,6 @@ import { DataTableResource } from 'angular-4-data-table/dist';
 })
 export class AdminProductsComponent implements OnDestroy {
   products: Product[];
-  filteredProducts: any[];
   subscription: Subscription;
   tableResource: DataTableResource<Product>;
   items: Product[] = [];
@@ -20,7 +19,7 @@ export class AdminProductsComponent implements OnDestroy {
   constructor(productService: ProductService) {
     this.subscription = productService.getAll()
       .subscribe(products => {
-        this.filteredProducts = this.products = products;
+        this.products = products;
         this.initializeTable(products);
       });
   }
@@ -45,8 +44,10 @@ export class AdminProductsComponent implements OnDestroy {
   }
 
   filter(query: string) {
-    this.filteredProducts = (query) ?
+    const filteredProducts = (query) ?
       this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
       this.products;
+
+    this.initializeTable(filteredProducts);
   }
 }
